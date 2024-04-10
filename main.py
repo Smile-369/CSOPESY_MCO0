@@ -37,11 +37,11 @@ def recruit_rc(rc_id):
         if super_count >= 1 and super_count <= 2:
             print(f"Team {team_counter} is ready and now launching to battle (sc:{super_count} | rc:{regular_count})")
             team_counter += 1
-        else:
-            print(f"Team {team_counter} cannot be formed. Sending remaining citizens home.")
             rc.clear()  # Clear the RC list
             sc.clear()  # Clear the SC list
             team.clear()  # Clear the team list
+        else:
+            print(f"Team {team_counter} cannot be formed. Sending remaining citizens home.")
             if total_citizens == r + s:
                 data_lock.release()
                 return
@@ -73,16 +73,16 @@ def recruit_sc(sc_id):
         if super_count >= 1 and super_count <= 2:
             print(f"Team {team_counter} is ready and now launching to battle (sc:{super_count} | rc:{regular_count})")
             team_counter += 1
-        else:
-            print(f"Team {team_counter} cannot be formed. Sending remaining citizens home.")
             rc.clear()  # Clear the RC list
             sc.clear()  # Clear the SC list
             team.clear()  # Clear the team list
+        else:
+            print(f"Team {team_counter} cannot be formed. Sending remaining citizens home.")
             if total_citizens == r + s:
                 data_lock.release()
                 return
         data_lock.release()
-
+        
 def main():
     global r
     global s

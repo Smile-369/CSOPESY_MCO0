@@ -108,8 +108,7 @@ def main():
         t.join()
 
     print(f"Total number of teams produced: {team_counter - 1}")  # Subtract 1 to get the correct total number of teams
-    print(f"Regular Citizens not sent: {len(rc)}")
-    print(f"Super Citizens not sent: {len(sc)}")
+
 
 if __name__ == "__main__":
     main()

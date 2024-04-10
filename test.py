@@ -103,3 +103,4 @@ def main():
 if __name__ == "__main__":
     main()
     print(f"Total number of teams produced: {team_counter - 1}")  # Subtract 1 to get the correct total number of teams
+

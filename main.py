@@ -9,9 +9,11 @@ team_counter = 1  # Starting team number
 data_lock = Lock()
 r = 0
 s = 0
+total_citizens = 0
 
 def recruit_rc(rc_id):
     global team_counter
+    global total_citizens
     while True:
         data_lock.acquire()
         if len(rc) < r and len(team) < 4: # Check if there's room for more RC and the team is not full
@@ -19,6 +21,7 @@ def recruit_rc(rc_id):
             print(f"Regular Citizen {rc_id} is signing up")
             rc.append(rc_id)
             team.append(rc_id)
+            total_citizens += 1
             print(f"RC {rc_id} joined team {team_counter}")
             data_lock.release()
             break
@@ -39,13 +42,14 @@ def recruit_rc(rc_id):
             rc.clear()  # Clear the RC list
             sc.clear()  # Clear the SC list
             team.clear()  # Clear the team list
-            if len(rc) == 0 and len(sc) == 0:
+            if total_citizens == r + s:
                 data_lock.release()
                 return
         data_lock.release()
 
 def recruit_sc(sc_id):
     global team_counter
+    global total_citizens
     while True:
         data_lock.acquire()
         if len(sc) < s and len(team) < 4: # Check if there's room for more SC and the team is not full
@@ -53,6 +57,7 @@ def recruit_sc(sc_id):
             print(f"Super Citizen {sc_id} is signing up")
             sc.append(sc_id)
             team.append(sc_id)
+            total_citizens += 1
             print(f"SC {sc_id} joined team {team_counter}")
             data_lock.release()
             break
@@ -73,7 +78,7 @@ def recruit_sc(sc_id):
             rc.clear()  # Clear the RC list
             sc.clear()  # Clear the SC list
             team.clear()  # Clear the team list
-            if len(rc) == 0 and len(sc) == 0:
+            if total_citizens == r + s:
                 data_lock.release()
                 return
         data_lock.release()
